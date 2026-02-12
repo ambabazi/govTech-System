@@ -1,14 +1,24 @@
+import application.*;
 import model.*;
+import services.ApplicationManager;
 
 public class Main {
     public static void main(String[] args) {
-        Citizen citizen = new Citizen("0784263044", "Agnes Mbabazi");
 
-        System.out.println(citizen.getNames() + " " + citizen.getPhoneNumber() + ".");
+        Citizen citizen = new Citizen("+250784263044", "Agnes Marie");
+    
+        GovernmentService birthCertificateService = new BirthCertificateService();
 
-        BirthCertificateService birthCertificateService = new BirthCertificateService();
-        System.out.println("Service: " + birthCertificateService.getServiceName() + ", Fee: " + birthCertificateService.getServiceFee());
+        ServiceApplication application = new ServiceApplication(citizen, birthCertificateService, ApplicationStatus.PENDING);
 
-        PassportService passportService = new PassportService();
-        System.out.println("Service: " + passportService.getServiceName() + ", Fee: " + passportService.getServiceFee());
-    }}
+        ApplicationManager manager = new ApplicationManager();
+
+        manager.submitApplication(application);
+        manager.processApplications();
+        
+        for(ServiceApplication app : manager.getApplications()) { 
+            System.out.println(app);
+        }
+    
+    }
+}

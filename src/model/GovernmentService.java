@@ -16,4 +16,8 @@ public class GovernmentService {
     public double getServiceFee() {
         return serviceFee;
     }
+    
+    public boolean validateApplication() {
+        return true;
+    }
 }
