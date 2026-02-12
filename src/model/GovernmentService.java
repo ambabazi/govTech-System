@@ -3,9 +3,9 @@ package model;
 public class GovernmentService {
     
     private final String serviceName;
-    private final String serviceFee;
+    private final double serviceFee;
 
-    public GovernmentService(String serviceName, String serviceFee) {
+    public GovernmentService(String serviceName, double serviceFee) {
         this.serviceName = serviceName;
         this.serviceFee = serviceFee;
     }
@@ -13,7 +13,7 @@ public class GovernmentService {
     public String getServiceName() {
         return serviceName;
         }
-    public String getServiceFee() {
+    public double getServiceFee() {
         return serviceFee;
     }
 }
