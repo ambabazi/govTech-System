@@ -1,8 +1,9 @@
 package services;
 
-import java.util.List;
-import java.util.ArrayList;
 import application.ServiceApplication;
+import exceptions.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ApplicationManager {
     
@@ -12,7 +13,21 @@ public class ApplicationManager {
         this.applications = new ArrayList<>();
     }
 
-    public void submitApplication(ServiceApplication application) {
+    public void submitApplication(ServiceApplication application)
+            throws InvalidApplication, InsufficientBalance {
+
+        if (!application.getService().validateApplication()) {
+            throw new InvalidApplication("Service validation failed.");
+        }
+
+        double fee = application.getService().getServiceFee();
+
+        if (application.getApplicant().getBalance() < fee) {
+            throw new InsufficientBalance("Not enough balance to pay service fee.");
+        }
+
+        application.getApplicant().deductBalance(fee);
+
         applications.add(application);
     }
 
