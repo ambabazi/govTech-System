@@ -1,32 +1,50 @@
-import application.*;
-import model.*;
-import services.ApplicationManager;
-import exceptions.*;
+import java.util.*;
 
 public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
 
-        Citizen citizen = new Citizen("+250784263044", "Agnes Marie");
-        citizen.setBalance(1000);
-    
-        GovernmentService birthCertificateService = new BirthCertificateService();
+        int choice;
 
-        ServiceApplication application = new ServiceApplication(citizen, birthCertificateService, ApplicationStatus.PENDING);
+        do {
+            System.out.println("\n=== DIGITAL GOVERNMENT SYSTEM ===");
+            System.out.println("1. Register Citizen");
+            System.out.println("2. Apply for Service");
+            System.out.println("3. Process Applications");
+            System.out.println("4. View Applications");
+            System.out.println("5. Exit");
+            System.out.print("Choose option: ");
 
-        ApplicationManager manager = new ApplicationManager();
+            choice = scanner.nextInt();
+            scanner.nextLine();
 
-        try {
-            manager.submitApplication(application);
-            System.out.println("Application submitted successfully");
-        } catch (InvalidApplication | InsufficientBalance e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        
-        manager.processApplications();
-        
-        for(ServiceApplication app : manager.getApplications()) { 
-            System.out.println(app);
-        }
-    
+            switch (choice) {
+                case 1:
+                    System.out.println("Citizen registered.");
+                    break;
+
+                case 2:
+                    System.out.println("Application submitted.");
+                    break;
+
+                case 3:
+                    System.out.println("Applications processed.");
+                    break;
+
+                case 4:
+                    System.out.println("Displaying applications...");
+                    break;
+
+                case 5:
+                    System.out.println("Exiting system...");
+                    break;
+
+                default:
+                    System.out.println("Invalid option.");
+            }
+
+        } while (choice != 5);
     }
 }
